@@ -19,7 +19,8 @@ function main() {
       });
     });
   }else{
-    for (var i = 0; i < parseInt(getParameterByName('members')); i++) {
+    let ballLength= getParameterByName('members')?parseInt(getParameterByName('members')):10;
+    for (var i = 0; i < ballLength; i++) {
       balls.push({
         id: i + 1,
         x: Math.random() * canvas.width,
