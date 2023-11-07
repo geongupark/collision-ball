@@ -6,17 +6,30 @@ function main() {
   var balls = [];
   var rank = [];
   let speed = getParameterByName('speed')?parseInt(getParameterByName('speed')):1;
-  getParameterByName('members').split(',').forEach(function(member) {
-    balls.push({
-      id: member,
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      dx: (Math.random() * 2 - 1) * 5,
-      dy: (Math.random() * 2 - 1) * 5,
-      
-      radius: getParameterByName('radius')?parseInt(getParameterByName('radius')):12
+  if(getParameterByName('members') && getParameterByName('members').includes(',')){
+    getParameterByName('members').split(',').forEach(function(member) {
+      balls.push({
+        id: member,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() * 2 - 1) * 5,
+        dy: (Math.random() * 2 - 1) * 5,
+        
+        radius: getParameterByName('radius')?parseInt(getParameterByName('radius')):12
+      });
     });
-  });
+  }else{
+    for (var i = 0; i < parseInt(getParameterByName('members')); i++) {
+      balls.push({
+        id: i + 1,
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        dx: (Math.random() * 2 - 1) * 5,
+        dy: (Math.random() * 2 - 1) * 5,
+        radius: getParameterByName('radius')?parseInt(getParameterByName('radius')):12
+      });
+    }
+  }
   
   function drawBall(ball) {
     ctx.beginPath();
